@@ -254,10 +254,9 @@ Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE)
 
 Desenvolvido com dedicação por **Murilo Guasti Soares**.
 
-- 📸 **Instagram**: [@muriloguasti_](https://www.instagram.com/muriloguasti_)
-- ✉️ **E-mail**: [muriloguasti.contato@gmail.com](mailto:muriloguasti.contato@gmail.com)
-- 🐙 **GitHub**: [@MuriloGuasti](https://github.com/MuriloGuasti)
-- 🌐 **Projeto Online**: [Limpu! no Netlify](https://imaginative-ganache-73bb84.netlify.app/#)
+[![GitHub](https://img.shields.io/badge/GitHub-MuriloGuasti-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MuriloGuasti)
+[![Instagram](https://img.shields.io/badge/Instagram-@muriloguasti__-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/muriloguasti_)
+[![Gmail](https://img.shields.io/badge/Email-muriloguasti.contato@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:muriloguasti.contato@gmail.com)
 
 ---
 
