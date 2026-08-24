@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limpu! — Aplicativo Web</title>
+  <meta name="description"
+    content="Experimente o Limpu! no navegador. Divisão equilibrada e inteligente de tarefas domésticas.">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <script type="module" crossorigin src="/assets/index-DO566ZXY.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D-77VNI1.css">
+</head>
+
+<body>
+
+  <!-- Main Web App Container -->
+  <div class="app-container" id="appContainer">
+
+    <!-- ================================================================
+         INITIAL APP LAUNCH LOADING SCREEN (2s Visual Loading Transition)
+         ================================================================ -->
+    <div class="setup-transition-view active" id="appInitialLoadingView" aria-label="Carregando aplicativo">
+      <div class="setup-simple-loader">
+        <div class="ios-spinner" aria-hidden="true"></div>
+        <p class="setup-loading-label" id="appLoadingLabel">Carregando...</p>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         ONBOARDING / LOGIN FLOW CONTAINER
+         ================================================================ -->
+    <section class="onboarding-container" id="onboardingContainer" aria-label="Fluxo de Login e Onboarding">
+
+      <!-- Onboarding Top Header -->
+      <header class="onboarding-header" id="onboardingHeader">
+        <div class="onboarding-brand">
+          <span>Limpu<span class="brand-accent">!</span></span>
+        </div>
+
+        <!-- Step Progress Pills -->
+        <div class="step-tracker" id="stepTracker" aria-label="Progresso do cadastro">
+          <div class="step-pill active" id="pillStep1" title="Passo 1: Nome"></div>
+          <div class="step-pill" id="pillStep2" title="Passo 2: Idade"></div>
+          <div class="step-pill" id="pillStep3" title="Passo 3: Objetivo"></div>
+        </div>
+      </header>
+
+      <!-- Screens Wrapper -->
+      <div class="onboarding-screens">
+
+        <!-- ------------------------------------------------------------
+             STEP 1: QUAL O SEU NOME?
+             ------------------------------------------------------------ -->
+        <div class="step-view active" id="step1NameView">
+          <div class="step-content">
+            <div class="step-icon-badge" aria-hidden="true">👋</div>
+
+            <div class="step-typography">
+              <h1 class="step-title">Olá! Qual o seu <span class="highlight">nome</span>?</h1>
+              <p class="step-subtitle">Para começarmos a organizar sua casa de forma divertida, leve e compartilhada.</p>
+            </div>
+
+            <div class="step-interactive-area">
+              <div class="input-wrapper">
+                <label for="userNameInput" class="input-label">Seu primeiro nome ou apelido</label>
+                <div class="input-container">
+                  <input type="text" id="userNameInput" class="input-text" placeholder="Como prefere ser chamado(a)?"
+                    autocomplete="name" maxlength="30" autofocus>
+                  <button type="button" class="input-clear-btn" id="nameClearBtn" aria-label="Limpar texto">✕</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 1 Actions -->
+          <div class="step-actions">
+            <button type="button" class="btn btn-primary btn-block btn-lg" id="btnStep1Next" disabled>
+              <span>Avançar</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+            <div class="step-note">
+              <span>🔒 Ambiente de teste da versão Web</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------
+             TRANSITION 1: "Olá {name}, Seja bem-vindo ao Limpu!"
+             ------------------------------------------------------------ -->
+        <div class="setup-transition-view" id="transitionNameAgeView">
+          <div class="setup-welcome-card">
+            <div class="setup-icon-glow" aria-hidden="true">✨</div>
+            <div class="step-typography">
+              <h2 class="setup-welcome-title">
+                Olá <span id="trans1GreetingName" class="brand-blue">Usuário</span>, seja bem-vindo(a) ao Limpu<span
+                  class="brand-accent">!</span>
+              </h2>
+              <p class="setup-welcome-subtitle">Preparando seu início...</p>
+            </div>
+            <div class="ios-spinner" aria-label="Carregando..."></div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------
+             STEP 2: QUAL A SUA IDADE?
+             ------------------------------------------------------------ -->
+        <div class="step-view" id="step2AgeView">
+          <div class="step-content">
+            <div class="step-icon-badge" aria-hidden="true">🎂</div>
+
+            <div class="step-typography">
+              <h1 class="step-title">
+                Qual a sua <span class="highlight">idade</span>?
+              </h1>
+              <p class="step-subtitle">Arraste a barra para selecionar. Isso nos ajuda a personalizar sua rotina no app.
+              </p>
+            </div>
+
+            <!-- Interactive Age Slider Card -->
+            <div class="step-interactive-area">
+              <div class="slider-card">
+
+                <div class="age-display-box">
+                  <div class="age-number-container">
+                    <span class="age-number" id="ageNumberDisplay">24</span>
+                    <span class="age-unit">anos</span>
+                  </div>
+                  <span class="age-badge" id="ageBadgeDisplay">⚡ Autonomia & Energia</span>
+                </div>
+
+                <!-- Slider Controls Row -->
+                <div class="slider-interactive-row">
+                  <button type="button" class="slider-btn-step" id="btnAgeMinus" aria-label="Diminuir idade">−</button>
+
+                  <div class="slider-track-container">
+                    <div class="slider-fill-track" id="sliderFillTrack"></div>
+                    <input type="range" id="ageRangeInput" class="custom-range-input" min="14" max="99" value="24"
+                      aria-label="Selecionar idade">
+                  </div>
+
+                  <button type="button" class="slider-btn-step" id="btnAgePlus" aria-label="Aumentar idade">+</button>
+                </div>
+
+                <div class="slider-limits-row">
+                  <span>14 anos</span>
+                  <span>99 anos</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 Actions -->
+          <div class="step-actions">
+            <div class="step-actions-row">
+              <button type="button" class="btn btn-secondary btn-lg" id="btnStep2Back"
+                aria-label="Voltar para tela de nome">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Voltar</span>
+              </button>
+
+              <button type="button" class="btn btn-primary btn-lg" id="btnStep2Next">
+                <span>Avançar</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="step-note">
+              <span>✨ Ajuste sua idade facilmente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------
+             TRANSITION 2: "Legal! Idade salva."
+             ------------------------------------------------------------ -->
+        <div class="setup-transition-view" id="transitionAgeGoalView">
+          <div class="setup-welcome-card">
+            <div class="setup-icon-glow" aria-hidden="true">🎂</div>
+            <div class="step-typography">
+              <h2 class="setup-welcome-title">
+                Legal, <span id="trans2GreetingName" class="brand-blue">Usuário</span>! Idade salva<span class="brand-accent">.</span>
+              </h2>
+              <p class="setup-welcome-subtitle">Vamos personalizar sua rotina no Limpu...</p>
+            </div>
+            <div class="ios-spinner" aria-label="Carregando..."></div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------
+             STEP 3: QUAL É O SEU PRINCIPAL OBJETIVO POR AQUI?
+             ------------------------------------------------------------ -->
+        <div class="step-view" id="step3GoalView">
+          <div class="step-content">
+            <div class="step-icon-badge" aria-hidden="true">🎯</div>
+
+            <div class="step-typography">
+              <h1 class="step-title">
+                Qual é o seu principal <span class="highlight">objetivo</span> por aqui?
+              </h1>
+              <p class="step-subtitle">Selecione a opção que melhor combina com a sua rotina atual.</p>
+            </div>
+
+            <!-- 5 Interactive Goal Options -->
+            <div class="step-interactive-area">
+              <div class="goal-options-list" role="radiogroup" aria-label="Selecione seu objetivo principal">
+                
+                <div class="goal-option-card" role="radio" aria-checked="false" tabindex="0" data-goal="gamification" data-title="Amo gamificação e listas para manter o foco">
+                  <div class="goal-option-icon">🎮</div>
+                  <div class="goal-option-text">
+                    <span class="goal-option-label">Amo gamificação e listas para manter o foco</span>
+                  </div>
+                  <div class="goal-option-radio">
+                    <span class="radio-check">✓</span>
+                  </div>
+                </div>
+
+                <div class="goal-option-card" role="radio" aria-checked="false" tabindex="0" data-goal="solo" data-title="Moro sozinho(a) e preciso de motivação">
+                  <div class="goal-option-icon">🏡</div>
+                  <div class="goal-option-text">
+                    <span class="goal-option-label">Moro sozinho(a) e preciso de motivação</span>
+                  </div>
+                  <div class="goal-option-radio">
+                    <span class="radio-check">✓</span>
+                  </div>
+                </div>
+
+                <div class="goal-option-card" role="radio" aria-checked="false" tabindex="0" data-goal="family" data-title="Engajar a família toda (e incentivar as crianças)">
+                  <div class="goal-option-icon">👨‍👩‍👧‍👦</div>
+                  <div class="goal-option-text">
+                    <span class="goal-option-label">Engajar a família toda (e incentivar as crianças)</span>
+                  </div>
+                  <div class="goal-option-radio">
+                    <span class="radio-check">✓</span>
+                  </div>
+                </div>
+
+                <div class="goal-option-card" role="radio" aria-checked="false" tabindex="0" data-goal="friends" data-title="Dividir a casa com amigos/república sem brigas">
+                  <div class="goal-option-icon">👥</div>
+                  <div class="goal-option-text">
+                    <span class="goal-option-label">Dividir a casa com amigos/república sem brigas</span>
+                  </div>
+                  <div class="goal-option-radio">
+                    <span class="radio-check">✓</span>
+                  </div>
+                </div>
+
+                <div class="goal-option-card" role="radio" aria-checked="false" tabindex="0" data-goal="couple" data-title="Equilibrar as tarefas com meu parceiro(a)">
+                  <div class="goal-option-icon">💑</div>
+                  <div class="goal-option-text">
+                    <span class="goal-option-label">Equilibrar as tarefas com meu parceiro(a)</span>
+                  </div>
+                  <div class="goal-option-radio">
+                    <span class="radio-check">✓</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 Actions -->
+          <div class="step-actions">
+            <div class="step-actions-row">
+              <button type="button" class="btn btn-secondary btn-lg" id="btnStep3Back"
+                aria-label="Voltar para tela de idade">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Voltar</span>
+              </button>
+
+              <button type="button" class="btn btn-primary btn-lg" id="btnStep3Next" disabled>
+                <span>Avançar</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="step-note">
+              <span>🎯 Escolha seu objetivo para personalizarmos seu espaço</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================
+         MAIN APP DASHBOARD SHELL (Após concluir o login/onboarding)
+         ================================================================ -->
+    <section class="main-app-view" id="mainAppView" aria-label="Painel Principal do App">
+
+      <!-- Top App Header -->
+      <header class="app-header">
+        <div class="app-brand">
+          <div>
+            <div class="app-brand-text">Limpu<span class="brand-accent">!</span></div>
+            <div class="app-tagline-micro" id="appUserHouseTagline">Casa de André & Ju</div>
+          </div>
+        </div>
+
+        <div class="app-avatars-group">
+          <button type="button" class="app-avatar-btn" id="btnOpenProfileDrawer" title="Meu Perfil e Configurações" aria-label="Abrir Menu do Perfil">
+            <div class="app-avatar avatar-andre" id="appUserAvatar" title="Meu Perfil">U</div>
+          </button>
+          <button type="button" class="app-avatar avatar-plus" id="btnResetDemo"
+            title="Reiniciar fluxo de demonstração">+</button>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+
+        <!-- ============================================================
+             TAB 1: INÍCIO (#inicio)
+             ============================================================ -->
+        <div class="tab-view active" id="tabViewInicio">
+
+          <!-- Card: Progresso do Dia / Semana (Hero Style) -->
+          <article class="card-progress-hero">
+            <div class="card-progress-header">
+              <div>
+                <div class="progress-title">Progresso de Hoje</div>
+                <div class="progress-number-large" id="heroProgressNumber">0%</div>
+              </div>
+              <div class="progress-house-icon" aria-hidden="true">✨</div>
+            </div>
+
+            <div class="progress-track">
+              <div class="progress-fill" id="heroProgressFill" style="width: 0%;"></div>
+            </div>
+
+            <div class="progress-footer">
+              <div class="progress-message" id="heroProgressMsg">
+                Nenhuma tarefa pendente ✨
+              </div>
+              <span class="progress-tasks-count" id="heroProgressTasksCount">0/0 tarefas</span>
+            </div>
+          </article>
+
+          <!-- Mini Kanban Interactive Board -->
+          <div class="kanban-board-mini">
+
+            <!-- Column: Para Fazer -->
+            <div class="kanban-col-mini col-todo is-empty" data-status="todo">
+              <div class="kanban-col-header-mini header-todo">
+                <span>Para Fazer</span>
+                <span class="badge-count badge-count-todo" id="countTodo">0</span>
+              </div>
+              <div class="task-list-mini" id="listTodo"></div>
+            </div>
+
+            <!-- Column: Fazendo -->
+            <div class="kanban-col-mini col-doing is-empty" data-status="doing" id="colDoing">
+              <div class="kanban-col-header-mini header-doing">
+                <span>Fazendo</span>
+                <span class="badge-count badge-count-doing" id="countDoing">0</span>
+              </div>
+              <div class="task-list-mini" id="listDoing"></div>
+
+              <!-- Inline Focus HUD & Timer (Animado embaixo do Kanban FAZENDO) -->
+              <div class="kanban-inline-timer-hud" id="kanbanInlineTimerHud" aria-live="polite">
+                <div class="inline-timer-inner">
+                  <div class="inline-timer-top">
+                    <div class="timer-tag-live">
+                      <span class="live-pulse-dot"></span>
+                      <span>EM ANDAMENTO</span>
+                    </div>
+                    <span class="inline-timer-category-pill" id="inlineTimerCategory">🍽️ Cozinha</span>
+                  </div>
+
+                  <div class="inline-timer-display-box">
+                    <span class="inline-timer-digits" id="inlineTimerDigits">00:00</span>
+                    <span class="inline-timer-sub">TEMPO DECORRIDO</span>
+                  </div>
+
+                  <div class="inline-timer-actions">
+                    <button type="button" class="btn btn-success-finish btn-block" id="btnInlineTimerFinish">
+                      <span class="btn-icon">🎉</span>
+                      <span>Terminei!</span>
+                    </button>
+                    <button type="button" class="btn btn-subtle-cancel btn-block" id="btnInlineTimerCancel">
+                      <span>Cancelar tarefa</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column: Feito -->
+            <div class="kanban-col-mini col-done is-empty" data-status="done">
+              <div class="kanban-col-header-mini header-done">
+                <span>Feito</span>
+                <span class="badge-count badge-count-done" id="countDone">0</span>
+              </div>
+              <div class="task-list-mini" id="listDone"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             TAB 2: TAREFAS (#tarefas)
+             ============================================================ -->
+        <div class="tab-view" id="tabViewTarefas" style="display: none;">
+
+          <!-- Daily Slots Progress Banner -->
+          <div class="daily-slots-banner">
+            <div class="slots-banner-content">
+              <div class="slots-text-group">
+                <span class="slots-title">Tarefas de Hoje</span>
+                <span class="slots-subtitle">Adicione até 3 tarefas para manter o foco e equilíbrio</span>
+              </div>
+              <div class="slots-counter-group">
+                <div class="slots-pills-row" id="dailySlotsPills"></div>
+                <span class="slots-count-number" id="dailySlotsCount">0/3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Selection Drawer Trigger Button -->
+          <div class="category-drawer-trigger-box">
+            <button type="button" class="category-drawer-trigger-btn" id="btnCategoryDrawerOpen"
+              aria-label="Abrir seletor de categorias">
+              <div class="category-trigger-left">
+                <span class="category-trigger-icon" id="categoryDrawerCurrentIcon">✨</span>
+                <div class="category-trigger-text">
+                  <span class="category-trigger-label">Categoria</span>
+                  <span class="category-trigger-value" id="categoryDrawerCurrentName">Todas as categorias</span>
+                </div>
+              </div>
+              <div class="category-trigger-right">
+                <span class="category-trigger-badge">Trocar</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </button>
+          </div>
+
+          <!-- Categorized Tasks List -->
+          <div class="tasks-catalog-container" id="tasksCatalogList"></div>
+
+        </div>
+
+        <!-- ============================================================
+             TAB 3: HISTÓRICO (#historico)
+             ============================================================ -->
+        <div class="tab-view" id="tabViewHistorico" style="display: none;">
+
+          <!-- Streak Hero Card (Bolha de Sabão Radiante & Gamificação) -->
+          <div class="streak-hero-card is-inactive" id="streakHeroCard">
+            <div class="streak-card-top">
+              <div class="streak-badge-left">
+                <div class="streak-bubble-wrapper" id="streakBubbleIcon">
+                  <span class="bubble-symbol">🫧</span>
+                  <span class="bubble-sparkle sparkle-1">✨</span>
+                  <span class="bubble-sparkle sparkle-2">✨</span>
+                </div>
+                <div class="streak-numbers-group">
+                  <span class="streak-count-number" id="streakCountDisplay">3</span>
+                  <span class="streak-count-label">Dias Seguidos</span>
+                </div>
+              </div>
+              <div class="streak-status-pill" id="streakStatusPill">
+                <span id="streakStatusText">⏳ Falta 20 pts para acender</span>
+              </div>
+            </div>
+
+            <!-- Daily Target Progress Bar (Meta: 20 pts) -->
+            <div class="streak-target-box">
+              <div class="streak-target-header">
+                <span class="streak-target-title">Meta diária para acender a bolha:</span>
+                <span class="streak-target-val" id="streakPointsProgress">0 / 20 pts</span>
+              </div>
+              <div class="streak-progress-bar-bg">
+                <div class="streak-progress-bar-fill" id="streakProgressFill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- Streak Freeze Safeguard (Escudo Protetor) -->
+            <button type="button" class="streak-freeze-bar" id="btnStreakFreezeInfo" aria-label="Informações sobre o escudo de proteção">
+              <div class="freeze-left">
+                <span class="freeze-icon">🛡️</span>
+                <div class="freeze-text">
+                  <strong>Proteção de Sequência</strong>
+                  <span>1 Escudo ativo contra imprevistos</span>
+                </div>
+              </div>
+              <span class="freeze-badge-info">Como funciona?</span>
+            </button>
+          </div>
+
+          <!-- Month Total Summary Banner -->
+          <div class="history-month-summary-card" id="historyMonthSummaryBadge">
+            <span>📅 Total no mês: <strong>0 tarefas</strong></span>
+            <span>•</span>
+            <span><strong>+0 pts</strong></span>
+          </div>
+
+          <!-- Interactive Calendar Card -->
+          <div class="calendar-card">
+            <!-- Calendar Navigation Header -->
+            <div class="calendar-header">
+              <div class="calendar-title-group">
+                <h2 class="calendar-month-label" id="calendarMonthLabel">Agosto 2026</h2>
+                <button type="button" class="calendar-today-btn" id="btnCalToday">Hoje</button>
+              </div>
+              <div class="calendar-nav-buttons">
+                <button type="button" class="cal-nav-btn" id="btnCalPrevMonth" aria-label="Mês anterior">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button type="button" class="cal-nav-btn" id="btnCalNextMonth" aria-label="Próximo mês">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Weekdays Row -->
+            <div class="calendar-weekdays-row">
+              <span>Dom</span>
+              <span>Seg</span>
+              <span>Ter</span>
+              <span>Qua</span>
+              <span>Qui</span>
+              <span>Sex</span>
+              <span>Sáb</span>
+            </div>
+
+            <!-- Days Grid (Generated dynamically via JS) -->
+            <div class="calendar-days-grid" id="calendarDaysGrid"></div>
+
+            <!-- Calendar Legend -->
+            <div class="calendar-legend-row">
+              <div class="legend-item">
+                <span class="legend-gold-pill">🫧 Bolha acesa</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot activity-dot"></span>
+                <span>Com tarefas</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot today-dot"></span>
+                <span>Hoje</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Day Activity Details Card -->
+          <div class="history-details-card">
+            <div class="history-details-header">
+              <div class="history-header-left">
+                <span class="history-header-icon" aria-hidden="true">📋</span>
+                <div class="history-header-text">
+                  <h3 class="history-date-title" id="historyDetailDate">Hoje, 20 de Agosto</h3>
+                  <span class="history-date-sub">Atividades registradas</span>
+                </div>
+              </div>
+              <div class="history-header-badges">
+                <span class="history-badge-count" id="historyDetailTasksCount">0 tarefas</span>
+                <span class="history-badge-points" id="historyDetailPoints">+0 pts</span>
+              </div>
+            </div>
+
+            <!-- Tasks List for Selected Day -->
+            <div class="history-tasks-list" id="historyDetailTasksList"></div>
+
+            <!-- Empty State for Selected Day -->
+            <div class="history-empty-day" id="historyEmptyDay" style="display: none;">
+              <span class="empty-day-icon" aria-hidden="true">🌿</span>
+              <p class="empty-day-text">Nenhuma tarefa realizada neste dia.<br>Aproveite para descansar ou programar suas próximas atividades!</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             TAB 4: AMIGOS (#amigos)
+             ============================================================ -->
+        <div class="tab-view" id="tabViewAmigos" style="display: none;">
+          <div class="friends-view-container">
+
+            <!-- Top Hero Card: Meu Desempenho -->
+            <div class="friends-user-hero">
+              <div class="friends-hero-badge">⭐ SEU DESEMPENHO ESTA SEMANA</div>
+              <div class="friends-user-row">
+                <div class="friends-user-avatar" id="friendsUserAvatar">U</div>
+                <div class="friends-user-meta">
+                  <div class="friends-user-title-row">
+                    <h3 class="friends-user-name" id="friendsUserName">Você</h3>
+                    <span class="friends-streak-pill streak-pending" id="friendsUserStreak">🫧 3 dias</span>
+                  </div>
+                  <p class="friends-user-desc" id="friendsUserDesc">Falta apenas 20 pts para acender a bolha hoje!</p>
+                </div>
+                <div class="friends-user-points">
+                  <span class="user-score-val" id="friendsUserScore">70</span>
+                  <span class="user-score-label">pts</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Friends Leaderboard Section -->
+            <div class="friends-leaderboard-section">
+              <div class="friends-section-header">
+                <div>
+                  <h3 class="friends-section-title">Placar de Amigos</h3>
+                  <span class="friends-section-subtitle">Toque em um amigo para opções e comparação</span>
+                </div>
+                <span class="friends-count-pill" id="friendsCountPill">3 amigos</span>
+              </div>
+
+              <!-- Dynamic Leaderboard Cards with You + Friends sorted -->
+              <div class="friends-list-cards" id="friendsListCards">
+                <!-- Dynamically rendered and animated by FriendsManager -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================================================
+             TAB 5: PLACAR DE LÍDERES (#ranking)
+             ============================================================ -->
+        <div class="tab-view" id="tabViewRanking" style="display: none;">
+          <div class="ranking-container">
+            
+            <!-- Ranking Header Card -->
+            <div class="ranking-hero-card">
+              <div class="ranking-hero-header">
+                <div>
+                  <span class="ranking-hero-tag">🌍 RANKING GLOBAL DE LARES</span>
+                  <h2 class="ranking-hero-title">Placar Mundial</h2>
+                  <p class="ranking-hero-subtitle">Acompanhe sua posição no mundo e conecte-se com novos lares!</p>
+                </div>
+                <div class="ranking-trophy-badge">🌍</div>
+              </div>
+
+              <!-- Time Range Filter Pills -->
+              <div class="ranking-period-pills" role="tablist">
+                <button type="button" class="period-pill active" data-period="week">Esta Semana</button>
+                <button type="button" class="period-pill" data-period="month">Este Mês</button>
+                <button type="button" class="period-pill" data-period="all">Geral</button>
+              </div>
+            </div>
+
+            <!-- Top Hero Card: Sua Posição Mundial -->
+            <div class="friends-user-hero">
+              <div class="friends-hero-badge">⭐ SUA POSIÇÃO MUNDIAL</div>
+              <div class="friends-user-row">
+                <div class="friends-user-avatar" id="rankingUserAvatar">U</div>
+                <div class="friends-user-meta">
+                  <div class="friends-user-title-row">
+                    <h3 class="friends-user-name" id="rankingUserName">Você</h3>
+                    <span class="ranking-global-rank-pill" id="rankingUserGlobalRankBadge">12º Lugar 🌍</span>
+                  </div>
+                  <p class="friends-user-desc" id="rankingUserDesc">Conclua tarefas para subir posições no mundo!</p>
+                </div>
+                <div class="friends-user-points">
+                  <span class="user-score-val" id="rankingUserScoreVal">70</span>
+                  <span class="user-score-label">pts</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Global World Leaderboard List Section -->
+            <div class="ranking-list-section">
+              <div class="friends-section-header">
+                <div>
+                  <h3 class="friends-section-title">Classificação Mundial</h3>
+                  <span class="friends-section-subtitle">Toque em um jogador para enviar solicitação</span>
+                </div>
+                <span class="friends-count-pill" id="globalRankingCountPill">19 lares</span>
+              </div>
+
+              <!-- Dynamic Global Leaderboard Cards Container -->
+              <div class="friends-list-cards" id="globalRankingListCards">
+                <!-- Injected via RankingManager -->
+              </div>
+            </div>
+
+            <!-- Weekly Achievements Badges -->
+            <div class="ranking-achievements-card">
+              <div class="achievements-header">
+                <span class="achievements-icon">🎖️</span>
+                <h3 class="achievements-title">Conquistas da Semana</h3>
+              </div>
+              <div class="achievements-grid">
+                <div class="achievement-badge is-unlocked" title="Louça lavada 5x seguidas">
+                  <span class="badge-emoji">🧼</span>
+                  <span class="badge-label">Mestre da Cozinha</span>
+                </div>
+                <div class="achievement-badge is-unlocked" title="Meta de 20 pts batida 4 dias seguidos">
+                  <span class="badge-emoji">✨</span>
+                  <span class="badge-label">Bolha Dourada</span>
+                </div>
+                <div class="achievement-badge is-unlocked" title="3 tarefas feitas com foco total">
+                  <span class="badge-emoji">⚡</span>
+                  <span class="badge-label">Foco Máximo</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Toast feedback alert inside app -->
+        <div class="app-feedback-toast" id="appFeedbackToast">
+          <span id="toastIcon">🎉</span>
+          <span id="toastText">Boa! Tarefa concluída +10 pts</span>
+        </div>
+
+      </div>
+
+      <!-- ================================================================
+           CONFIRMATION POPUP MODAL (Adicionar Tarefa)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="taskConfirmModal" aria-modal="true" role="dialog">
+        <div class="app-modal-card">
+          <div class="modal-icon-badge" aria-hidden="true">✨</div>
+          <div class="modal-body">
+            <span class="modal-tag-category" id="confirmModalCategory">🍽️ Cozinha</span>
+            <h3 class="modal-title">Gostaria de adicionar a tarefa <span class="highlight-task-name"
+                id="confirmModalTaskName">Lavar a louça</span>?</h3>
+            <div class="modal-meta-row">
+              <span class="modal-points-badge" id="confirmModalPoints">+30 pts</span>
+              <span class="modal-remaining-hint" id="confirmModalRemaining">Você ainda pode escolher 2 tarefas
+                hoje.</span>
+            </div>
+          </div>
+          <div class="modal-actions-row">
+            <button type="button" class="btn btn-secondary modal-btn-cancel" id="btnConfirmModalCancel">
+              <span>Voltar</span>
+            </button>
+            <button type="button" class="btn btn-primary modal-btn-confirm" id="btnConfirmModalConfirm">
+              <span>Sim!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           DAILY LIMIT REACHED MODAL (Máximo 3 tarefas/dia)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="taskLimitModal" aria-modal="true" role="dialog">
+        <div class="app-modal-card">
+          <div class="modal-icon-badge modal-icon-limit" aria-hidden="true">🎯</div>
+          <div class="modal-body">
+            <h3 class="modal-title">Limite diário atingido!</h3>
+            <p class="modal-desc">Você já escolheu <strong>3 tarefas</strong> para o seu dia. O segredo do Limpu! é a
+              consistência sem sobrecarga.</p>
+            <div class="modal-info-box">
+              <span>⏰ As tarefas do dia resetam automaticamente após a meia-noite.</span>
+            </div>
+          </div>
+          <div class="modal-actions-row single-action">
+            <button type="button" class="btn btn-primary btn-block" id="btnLimitModalOk">
+              <span>Entendi!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TASK START CONFIRMATION MODAL (Iniciar Tarefa?)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="taskStartModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card">
+          <div class="modal-icon-badge modal-icon-timer" aria-hidden="true">⏱️</div>
+          <div class="modal-body">
+            <span class="modal-tag-category" id="startModalCategory">🍽️ Cozinha</span>
+            <h3 class="modal-title">Gostaria de iniciar a tarefa <span class="highlight-task-name" id="startModalTaskName">Lavar a louça</span>?</h3>
+            <div class="modal-meta-row">
+              <span class="modal-points-badge" id="startModalPoints">+30 pts</span>
+              <span class="modal-remaining-hint">Ao clicar em Pronto!, o cronômetro começará a contar o seu tempo de foco!</span>
+            </div>
+          </div>
+          <div class="modal-actions-row">
+            <button type="button" class="btn btn-secondary modal-btn-cancel" id="btnStartModalCancel">
+              <span>Agora não</span>
+            </button>
+            <button type="button" class="btn btn-primary modal-btn-confirm" id="btnStartModalConfirm">
+              <span>Pronto!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TASK REOPEN CONFIRMATION MODAL (Reabrir tarefa de FEITO para PARA FAZER)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="taskReopenModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card">
+          <div class="modal-icon-badge modal-icon-reopen" aria-hidden="true">↩️</div>
+          <div class="modal-body">
+            <span class="modal-tag-category" id="reopenModalCategory">🍽️ Cozinha</span>
+            <h3 class="modal-title">Gostaria de reabrir a tarefa <span class="highlight-task-name" id="reopenModalTaskName">Lavar a louça</span>?</h3>
+            <p class="modal-desc">Ao mover de volta para <strong>Para Fazer</strong>, a conclusão e os pontos serão reabertos para que você possa realizá-la novamente.</p>
+            <div class="modal-info-box">
+              <span>✨ Você poderá refazer a atividade e iniciar o cronômetro quando quiser!</span>
+            </div>
+          </div>
+          <div class="modal-actions-row">
+            <button type="button" class="btn btn-secondary modal-btn-cancel" id="btnReopenModalCancel">
+              <span>Manter</span>
+            </button>
+            <button type="button" class="btn btn-primary modal-btn-confirm" id="btnReopenModalConfirm">
+              <span>Sim, reabrir!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           SINGLE TASK IN PROGRESS MODAL (Foco Único - Apenas 1 tarefa em andamento)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="taskSingleFocusModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card">
+          <div class="modal-icon-badge modal-icon-focus" aria-hidden="true">⏳</div>
+          <div class="modal-body">
+            <span class="modal-tag-category">Foco Único • Limpu!</span>
+            <h3 class="modal-title">Finalize sua tarefa em andamento primeiro!</h3>
+            <p class="modal-desc">Você já está realizando a tarefa <strong id="singleFocusTaskName">Lavar a louça</strong>. Para manter a atenção plena, não é possível fazer duas tarefas ao mesmo tempo.</p>
+            <div class="modal-info-box">
+              <span>💡 Conclua ou cancele a atividade atual antes de iniciar outra.</span>
+            </div>
+          </div>
+          <div class="modal-actions-row single-action">
+            <button type="button" class="btn btn-primary btn-block" id="btnSingleFocusOk">
+              <span>Entendi, vou focar!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           STREAK IGNITION CELEBRATION POP-UP (Bolha Acesa! 20+ pts)
+           ================================================================ -->
+      <div class="app-modal-overlay streak-celebration-overlay" id="streakCelebrationModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card streak-celebration-card" id="streakCelebrationCard">
+          <!-- Animated Bubble Hero: Starts Gray and Ignites to Glowing Gold -->
+          <div class="celebration-bubble-stage" id="celebrationBubbleStage">
+            <div class="celebration-aura-glow"></div>
+            <div class="celebration-sparkles-orbit">
+              <span class="sparkle sp-1">✨</span>
+              <span class="sparkle sp-2">✨</span>
+              <span class="sparkle sp-3">⭐</span>
+              <span class="sparkle sp-4">✨</span>
+            </div>
+            <div class="celebration-bubble-icon" id="celebrationBubbleIcon">🫧</div>
+          </div>
+
+          <div class="modal-body celebration-modal-body">
+            <span class="celebration-tag-pill" id="celebrationStreakTag">🫧 Sequência de 3 dias!</span>
+            <h3 class="celebration-title">Parabéns! Deixou sua bolha Brilhando!</h3>
+            <p class="celebration-affirmation">Você cuidou do seu lar com carinho e dedicação hoje. Pequenos hábitos diários mantêm a casa limpa e a rotina em perfeita harmonia!</p>
+            
+            <div class="celebration-stats-pill">
+              <span class="stats-icon">🎯</span>
+              <span id="celebrationPointsText">+20 pontos conquistados hoje!</span>
+            </div>
+          </div>
+
+          <div class="modal-actions-row single-action">
+            <button type="button" class="btn btn-celebration-action btn-block" id="btnStreakCelebrationClose">
+              <span>Isso aí!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           STREAK FREEZE INFO MODAL (Escudo Protetor)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="streakFreezeModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card">
+          <div class="modal-icon-badge modal-icon-shield" aria-hidden="true">🛡️</div>
+          <div class="modal-body">
+            <h3 class="modal-title">Proteção de Sequência (Streak Freeze)</h3>
+            <p class="modal-desc">A vida acontece e imprevistos fazem parte da rotina. Se você não conseguir fazer tarefas em um dia, seu <strong>Escudo de Proteção</strong> é utilizado automaticamente para não <strong>estourar a sua Bolha</strong>.</p>
+            <div class="modal-info-box">
+              <span>✨ Sua sequência de dias fica perdoada e preservada, sem frustrações!</span>
+            </div>
+          </div>
+          <div class="modal-actions-row single-action">
+            <button type="button" class="btn btn-primary btn-block" id="btnStreakFreezeClose">
+              <span>Entendi, muito bom!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           CATEGORY SELECTION DRAWER (Bottom Sheet)
+           ================================================================ -->
+      <div class="category-drawer-overlay" id="categoryDrawerOverlay" aria-modal="true" role="dialog">
+        <div class="category-drawer-sheet" id="categoryDrawerSheet">
+          <div class="category-drawer-handle" aria-hidden="true"></div>
+          <div class="category-drawer-header">
+            <div class="category-drawer-title-group">
+              <h3 class="category-drawer-title">Categorias</h3>
+              <span class="category-drawer-subtitle">Escolha o ambiente para visualizar</span>
+            </div>
+            <button type="button" class="category-drawer-close" id="btnCategoryDrawerClose"
+              aria-label="Fechar categorias">✕</button>
+          </div>
+          <div class="category-drawer-options">
+            <button type="button" class="category-option-item active" data-category="all">
+              <div class="cat-opt-left">
+                <span class="cat-opt-icon">✨</span>
+                <span class="cat-opt-name">Todas as categorias</span>
+              </div>
+              <span class="cat-opt-count">21 tarefas</span>
+            </button>
+            <button type="button" class="category-option-item" data-category="kitchen">
+              <div class="cat-opt-left">
+                <span class="cat-opt-icon">🍽️</span>
+                <span class="cat-opt-name">Cozinha</span>
+              </div>
+              <span class="cat-opt-count">5 tarefas</span>
+            </button>
+            <button type="button" class="category-option-item" data-category="cleaning">
+              <div class="cat-opt-left">
+                <span class="cat-opt-icon">🧹</span>
+                <span class="cat-opt-name">Limpeza Geral e Quartos</span>
+              </div>
+              <span class="cat-opt-count">5 tarefas</span>
+            </button>
+            <button type="button" class="category-option-item" data-category="bathroom">
+              <div class="cat-opt-left">
+                <span class="cat-opt-icon">🚽</span>
+                <span class="cat-opt-name">Banheiro</span>
+              </div>
+              <span class="cat-opt-count">4 tarefas</span>
+            </button>
+            <button type="button" class="category-option-item" data-category="laundry">
+              <div class="cat-opt-left">
+                <span class="cat-opt-icon">👕</span>
+                <span class="cat-opt-name">Lavanderia</span>
+              </div>
+              <span class="cat-opt-count">3 tarefas</span>
+            </button>
+            <button type="button" class="category-option-item" data-category="extras">
+              <div class="cat-opt-left">
+                <span class="cat-opt-icon">🪴</span>
+                <span class="cat-opt-name">Cuidados Extras</span>
+              </div>
+              <span class="cat-opt-count">4 tarefas</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           USER PROFILE DRAWER MENU (Menu Lateral Canto Superior Direito)
+           ================================================================ -->
+      <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+      <aside class="profile-drawer" id="userProfileDrawer" aria-label="Menu do Perfil" aria-hidden="true">
+        <div class="drawer-header">
+          <div class="drawer-header-title">
+            <span class="drawer-header-emoji">👤</span>
+            <h2 class="drawer-title">Meu Perfil</h2>
+          </div>
+          <button type="button" class="btn-close-drawer" id="btnCloseProfileDrawer" aria-label="Fechar menu">✕</button>
+        </div>
+
+        <div class="drawer-content">
+          <!-- Profile Hero Card -->
+          <div class="drawer-profile-card">
+            <div class="drawer-avatar" id="drawerUserAvatar">U</div>
+            <div class="drawer-profile-details">
+              <h3 class="drawer-user-name" id="drawerUserName">Usuário</h3>
+              <span class="drawer-user-house" id="drawerUserHouseTagline">Casa de André & Ju</span>
+            </div>
+          </div>
+
+          <!-- Drawer Navigation Menu List -->
+          <div class="drawer-menu-section">
+            <span class="drawer-section-label">Geral</span>
+            <div class="drawer-menu-list">
+              
+              <!-- 1. Configurações -->
+              <button type="button" class="drawer-menu-item" id="btnDrawerOpenSettings">
+                <div class="drawer-item-icon icon-settings">⚙️</div>
+                <div class="drawer-item-text">
+                  <span class="drawer-item-title">Configurações</span>
+                  <span class="drawer-item-subtitle">Regras da casa, limites e alertas</span>
+                </div>
+                <span class="drawer-item-chevron">›</span>
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Quick Action Section -->
+          <div class="drawer-menu-section">
+            <span class="drawer-section-label">Ações Rápidas</span>
+            <div class="drawer-menu-list">
+              <button type="button" class="drawer-menu-item is-reset" id="btnDrawerResetApp">
+                <div class="drawer-item-icon icon-reset">🔄</div>
+                <div class="drawer-item-text">
+                  <span class="drawer-item-title">Reiniciar App</span>
+                  <span class="drawer-item-subtitle">Recomeçar demonstração do início</span>
+                </div>
+                <span class="drawer-item-chevron">›</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- App Version & Info -->
+          <div class="drawer-footer-info">
+            <div class="drawer-app-logo">Limpu<span class="brand-accent">!</span></div>
+            <span>Versão Teste • Limpeza divertida, leve e compartilhada</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ================================================================
+           SETTINGS MODAL (Configurações)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="settingsModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card modal-settings-card">
+          <div class="modal-settings-header">
+            <div class="modal-header-left">
+              <div class="modal-icon-badge modal-icon-settings" aria-hidden="true">⚙️</div>
+              <div>
+                <h3 class="modal-title">Configurações</h3>
+                <span class="modal-subtitle">Personalize a sua experiência no Limpu!</span>
+              </div>
+            </div>
+            <button type="button" class="modal-close-btn" id="btnSettingsModalClose" aria-label="Fechar configurações">✕</button>
+          </div>
+
+          <div class="modal-settings-body">
+            
+            <!-- User Profile Summary -->
+            <div class="settings-modal-profile">
+              <div class="settings-avatar" id="settingsModalUserAvatar">U</div>
+              <div class="settings-profile-info">
+                <h4 class="settings-user-name" id="settingsModalUserName">Usuário</h4>
+                <span class="settings-user-role">Morador Ativo • Limpu!</span>
+              </div>
+            </div>
+
+            <!-- Group 1: Regras Diárias -->
+            <div class="settings-group">
+              <h4 class="settings-group-title">Regras Diárias</h4>
+              <div class="settings-item">
+                <div class="settings-item-left">
+                  <span>🎯 Limite por dia</span>
+                </div>
+                <span class="settings-item-val">3 tarefas / dia</span>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-left">
+                  <span>⏰ Reset diário</span>
+                </div>
+                <span class="settings-item-val">00:00 (Meia-noite)</span>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-left">
+                  <span>🫧 Meta da Bolha</span>
+                </div>
+                <span class="settings-item-val">20 pts diários</span>
+              </div>
+            </div>
+
+            <!-- Group 2: Notificações & Áudio -->
+            <div class="settings-group">
+              <h4 class="settings-group-title">Sons & Feedback</h4>
+              <div class="settings-item">
+                <span>Efeitos Sonoros Nativos</span>
+                <span class="settings-toggle-active">Ativado 🔊</span>
+              </div>
+              <div class="settings-item">
+                <span>Chuva de Confetes</span>
+                <span class="settings-toggle-active">Ativado 🎉</span>
+              </div>
+            </div>
+
+            <!-- Group 3: Sobre -->
+            <div class="settings-group">
+              <h4 class="settings-group-title">Sobre o Limpu!</h4>
+              <div class="settings-item">
+                <span>Versão</span>
+                <span class="settings-item-val">Teste • Web App</span>
+              </div>
+              <div class="settings-item">
+                <span>Armazenamento</span>
+                <span class="settings-item-val">Sessão Local</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-actions-row single-action">
+            <button type="button" class="btn btn-primary btn-block" id="btnSettingsModalOk">
+              <span>Pronto</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           EFFORT COMPARISON MODAL (Simulador / Comparador de Divisão)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="friendCompareModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card modal-compare-card">
+          
+          <button type="button" class="modal-close-btn compare-close" id="btnCompareModalClose" aria-label="Fechar comparação">✕</button>
+
+          <!-- Simulator Container Matching Landing Page Dark Design -->
+          <div class="simulator-results modal-sim-results">
+            <div class="sim-results-header">
+              <h4 class="sim-results-title">Divisão de Esforço da Casa</h4>
+              <span class="sim-fairness-status status-balanced" id="compareStatusBadge">⚖️ Divisão Justa & Saudável</span>
+            </div>
+
+            <!-- Progress Split Dual Bar -->
+            <div class="sim-balance-bar-wrap">
+              <div class="sim-balance-bar">
+                <div class="sim-bar-p1" id="compareBarP1" style="width: 48%;"></div>
+                <div class="sim-bar-p2" id="compareBarP2" style="width: 52%;"></div>
+              </div>
+              <div class="sim-bar-legend-row">
+                <span id="compareLegendP1">Você (Azul)</span>
+                <span id="compareLegendP2">André (Coral)</span>
+              </div>
+            </div>
+
+            <!-- Side by Side Resident Metric Boxes -->
+            <div class="sim-residents-scores">
+              <div class="sim-res-box box-p1">
+                <div class="sim-res-name" id="compareNameP1">Você</div>
+                <div class="sim-res-pts" id="comparePtsP1">50 pts</div>
+                <div class="sim-res-percent" id="comparePctP1">48%</div>
+              </div>
+
+              <div class="sim-res-box box-p2">
+                <div class="sim-res-name" id="compareNameP2">André</div>
+                <div class="sim-res-pts" id="comparePtsP2">55 pts</div>
+                <div class="sim-res-percent" id="comparePctP2">52%</div>
+              </div>
+            </div>
+
+            <!-- Dynamic Motivational Verdict Box -->
+            <div class="sim-verdict" id="compareVerdictText">
+              <strong>Sensacional!</strong> As tarefas estão distribuídas com equilíbrio ideal de esforço (<strong>48%</strong> vs <strong>52%</strong>). Ninguém fica sobrecarregado e a casa flui com leveza.
+            </div>
+          </div>
+
+          <div class="modal-compare-actions">
+            <button type="button" class="btn btn-primary btn-block btn-lg btn-compare-ok" id="btnCompareModalOk">
+              <span>Entendido, muito bom!</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           FRIEND ACTION MENU MODAL (Opções: Comparar, Parabenizar, Remover)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="friendActionModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card modal-friend-action-card">
+          <button type="button" class="modal-close-btn action-modal-close" id="btnFriendActionModalClose" aria-label="Fechar menu do amigo">✕</button>
+
+          <!-- Friend Header Summary -->
+          <div class="friend-action-header">
+            <div class="friend-action-avatar" id="friendActionAvatar">A</div>
+            <div class="friend-action-meta">
+              <h3 class="friend-action-name" id="friendActionName">André</h3>
+              <div class="friend-action-subrow">
+                <span class="friend-action-streak" id="friendActionStreak">🫧 5 dias</span>
+                <span class="friend-action-points" id="friendActionPoints">320 pts</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Options List -->
+          <div class="friend-action-options">
+            <button type="button" class="friend-option-btn option-compare" id="btnOptionCompareFriend">
+              <div class="option-icon-wrap icon-compare-bg">⚖️</div>
+              <div class="option-text-group">
+                <span class="option-title">Comparar Esforço</span>
+                <span class="option-desc">Ver equilíbrio e divisão das tarefas</span>
+              </div>
+              <span class="option-arrow">→</span>
+            </button>
+
+            <button type="button" class="friend-option-btn option-cheer" id="btnOptionCheerFriend">
+              <div class="option-icon-wrap icon-cheer-bg">👏</div>
+              <div class="option-text-group">
+                <span class="option-title">Parabenizar Amigo</span>
+                <span class="option-desc">Enviar palmas e incentivo no app</span>
+              </div>
+              <span class="option-arrow">🎉</span>
+            </button>
+
+            <button type="button" class="friend-option-btn option-remove" id="btnOptionRemoveFriend">
+              <div class="option-icon-wrap icon-remove-bg">🗑️</div>
+              <div class="option-text-group">
+                <span class="option-title">Remover Amigo</span>
+                <span class="option-desc">Deixar de acompanhar pontuação</span>
+              </div>
+              <span class="option-arrow">✕</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           REMOVE FRIEND CONFIRMATION MODAL
+           ================================================================ -->
+      <div class="app-modal-overlay" id="removeFriendConfirmModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card modal-confirm-card">
+          <div class="confirm-icon-badge">⚠️</div>
+          <h3 class="confirm-title" id="removeConfirmTitle">Remover Amigo?</h3>
+          <p class="confirm-desc" id="removeConfirmDesc">
+            Você tem certeza que deseja remover este amigo da sua lista? A divisão de esforço e pontuação não será mais exibida no placar.
+          </p>
+
+          <div class="modal-actions-row">
+            <button type="button" class="btn btn-secondary modal-btn-cancel" id="btnCancelRemoveFriend">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-danger modal-btn-confirm" id="btnConfirmRemoveFriend">
+              Sim, Remover
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           GLOBAL PLAYER ACTION MODAL (ENVIAR SOLICITAÇÃO DE AMIZADE)
+           ================================================================ -->
+      <div class="app-modal-overlay" id="playerActionModal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="app-modal-card modal-player-action-card">
+          <!-- Close Button -->
+          <button type="button" class="modal-card-close" id="btnPlayerActionClose" aria-label="Fechar pop-up">✕</button>
+
+          <!-- Player Header -->
+          <div class="modal-player-header">
+            <div class="modal-player-avatar" id="modalPlayerAvatar">C</div>
+            <div class="modal-player-info">
+              <div class="modal-player-title-row">
+                <h3 class="modal-player-name" id="modalPlayerName">Camila S.</h3>
+                <span class="modal-player-rank-pill" id="modalPlayerRankBadge">1º Lugar 👑</span>
+              </div>
+              <span class="modal-player-location" id="modalPlayerLocation">📍 São Paulo, SP</span>
+            </div>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="modal-player-stats-grid">
+            <div class="player-stat-box">
+              <span class="p-stat-label">Pontuação</span>
+              <span class="p-stat-val" id="modalPlayerScore">158 pts</span>
+            </div>
+            <div class="player-stat-box">
+              <span class="p-stat-label">Sequência</span>
+              <span class="p-stat-val" id="modalPlayerStreak">✨ 7 dias</span>
+            </div>
+          </div>
+
+          <!-- Bio / Cheer box -->
+          <div class="modal-player-cheer-card">
+            <span class="cheer-card-icon">💬</span>
+            <p class="cheer-card-text" id="modalPlayerCheer">"Casa sempre brilhando e rotina leve ✨"</p>
+          </div>
+
+          <!-- Action Container -->
+          <div class="modal-player-actions" id="modalPlayerActionsContainer">
+            <button type="button" class="btn btn-primary btn-block btn-lg btn-add-friend-action" id="btnSendFriendRequest">
+              <span>📩 Enviar Solicitação de Amizade</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Claps Overlay for Parabenizar Animation -->
+      <div class="floating-claps-overlay" id="floatingClapsOverlay" aria-hidden="true"></div>
+
+      <!-- Toast Notification Container -->
+      <div class="app-toast-container" id="appToastContainer" aria-live="polite"></div>
+
+      <!-- Bottom Navigation Bar -->
+      <nav class="app-bottom-nav" aria-label="Navegação do aplicativo">
+        <a href="#inicio" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          <span>Início</span>
+        </a>
+        <a href="#tarefas" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          <span>Tarefas</span>
+        </a>
+        <a href="#historico" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span>Histórico</span>
+        </a>
+        <a href="#amigos" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span>Amigos</span>
+        </a>
+        <a href="#ranking" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+            <path d="M4 22h16" />
+            <path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34" />
+            <path d="M18 4H6v7a6 6 0 0 0 12 0V4z" />
+          </svg>
+          <span>Placar</span>
+        </a>
+      </nav>
+
+    </section>
+
+    <!-- ================================================================
+         TRANSITION 2 OVERLAY: "Estamos preparando sua casa" / "Tudo pronto!"
+         Rendered as a top-level overlay on top of the main app dashboard
+         ================================================================ -->
+    <div class="setup-transition-view" id="transitionAgeAppView">
+      <div class="setup-preparing-box" id="preparingBox">
+
+        <!-- Phase 1: Loading (3 seconds) -->
+        <div class="phase-loading" id="prepPhaseLoading">
+          <div class="setup-icon-glow" aria-hidden="true">✨</div>
+          <div class="step-typography">
+            <h2 class="setup-welcome-title">Estamos preparando seu espaço da melhor maneira</h2>
+            <p class="setup-welcome-subtitle">Ajustando divisão justa e rotinas ideais...</p>
+          </div>
+          <div class="ios-spinner" aria-label="Aguarde 3 segundos..."></div>
+        </div>
+
+        <!-- Phase 2: Tudo Pronto! -->
+        <div class="phase-ready" id="prepPhaseReady">
+          <div class="setup-check-badge" aria-hidden="true">✓</div>
+          <div class="step-typography">
+            <h2 class="setup-ready-title">Tudo pronto!</h2>
+            <p class="setup-ready-desc">Seu espaço está configurado para uma rotina leve e equilibrada.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-block btn-lg" id="btnStartOrganizing">
+            <span>Começar a organizar!</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main JavaScript Bundle -->
+</body>
+
+</html>
