@@ -255,6 +255,7 @@ Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE)
 Desenvolvido com dedicação por **Murilo Guasti Soares**.
 
 [![GitHub](https://img.shields.io/badge/GitHub-MuriloGuasti-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MuriloGuasti)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Murilo%20Guasti%20Soares-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilo-guasti-soares/)
 [![Instagram](https://img.shields.io/badge/Instagram-@muriloguasti__-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/muriloguasti_)
 [![Gmail](https://img.shields.io/badge/Email-muriloguasti.contato@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:muriloguasti.contato@gmail.com)
 
